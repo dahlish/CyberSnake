@@ -2,7 +2,6 @@ var express = require("express");
 var app = express();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
-const port = process.env.port || 5000;
 const { v4: uuid } = require("uuid")
 var peopleTyping = [];
 
@@ -233,5 +232,5 @@ io.on("connection", (socket) => {
     }
 });
 
-http.listen(port, () => {
+http.listen(process.env.PORT, () => {
 });

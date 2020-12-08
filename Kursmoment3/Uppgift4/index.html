@@ -39,7 +39,10 @@
                 
                 socket.emit("chat message", chatInfo);
                 if (($("#m").val().toString().startsWith("/tell ") == false) && ($("#m").val() == "/online" == false))
-                $("#messages").append($("<li>").text(userObject.nickname + ": " + $("#m").val()));
+                {
+                    $("#messages").append($("<li>").text(userObject.nickname + ": " + $("#m").val()));
+                    window.scrollTo(0,document.body.scrollHeight);
+                }
                 $("#m").val("");
                 return false;
             });
