@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Chat</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <ul id="messages"></ul>
+    <div class="">
+    <form action="">
+        <input class="formInput" id="m" autocomplete="off" placeholder="Type your message here...">
+        <input class="formInput nickname" id="nickname" autocomplete="off" placeholder="Nickname">
+        <button>Send</button>
+    </form>
+
+    <label id="typingLabel">Currently typing: </label>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+
+        $(function(){
+            var userObject;
+            var socket = io();
+            $("form").submit(function(e) {
+                e.preventDefault();
+                socket.emit("nickname", $("#nickname").val());
+
+                var chatInfo = {
+                    nickname: $("#nickname").val(),
+                    message: $("#m").val(),
+                    user: userObject
+                }
+                
+                socket.emit("chat message", chatInfo);
+                if (($("#m").val().toString().startsWith("/tell ") == false) && ($("#m").val() == "/online" == false))
+                {
+                    $("#messages").append($("<li>").text(userObject.nickname + ": " + $("#m").val()));
+                    window.scrollTo(0,document.body.scrollHeight);
+                }
+                $("#m").val("");
+                return false;
+            });
+
+        socket.on("user", function(user){
+            userObject = user;
+        });
+
+        socket.on("chat message", function(msg){
+            $("#messages").append($("<li>").text(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+
+        socket.on("user connected", function(msg){
+            $("#messages").append($("<li>").html(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+        socket.on("user disconnected", function(msg){
+            $("#messages").append($("<li>").html(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+
+        socket.on("changed nickname", function(msg)
+        {
+            $("#messages").append($("<li>").html(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+        
+        $("#m").on("keypress", function(){
+            socket.emit("send typing", userObject);
+        });
+
+        
+        socket.on("broadcast typing", function(peopleTyping){
+            $("#typingLabel").css("display", "block");
+            $("#typingLabel").text(`Currently typing: `);
+            for (i = 0; i < peopleTyping.length; i++)
+            {
+                if (i == peopleTyping.length - 1)
+                {
+                    $("#typingLabel").append(`${peopleTyping[i].nickname}`);
+                }
+                else
+                {
+                    $("#typingLabel").append(`${peopleTyping[i].nickname}, `);
+                }
+            }
+        });
+
+        socket.on("nobody typing", function(){
+            $("#typingLabel").text(`Currently typing: `);
+            $("#typingLabel").css("display", "none");
+        });
+
+        socket.on("help", function(msg){
+            $("#messages").append($("<li>").text(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+
+        socket.on("display users", function(msg){
+            $("#messages").append($("<li>").html(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+        
+        socket.on("private", function(msg){
+            $("#messages").append($("<li>").html(msg));
+            window.scrollTo(0,document.body.scrollHeight);
+        });
+
+        });
+    </script>
+</body>
+</html>

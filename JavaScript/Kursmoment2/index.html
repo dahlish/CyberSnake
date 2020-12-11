@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery.animate-colors.js"></script>
+    <script src="js/hemuppgift2.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body>
+    <h1>Uppgift 1 Del 1: Gissa talet (UI Edition)</h1>
+    <label>Skriv in ett tal mellan 1-100<br></label>
+    <input id="guessField" type="number" class="textfield">
+    <button id="guessButton" class="largebutton">Gissa!</button>
+    <br><br>
+    <label id="guessResultLabel"></label>
+    <button id="playAgainButton" class="largebutton">Spela igen</button>
+
+
+    <br><br><br>
+
+    <h1>Uppgift 1 Del 2: Rövarspråket (UI Edition)</h1>
+    <label>Skriv in textsträngen du vill översätta nedan:</label><br>
+    <input id="translateField" type="text" class="textfield">
+    <button id="translateButton" class="largebutton">Översätt</button>
+    <br><br>
+    <label id="translatedTextLabel"></label>
+
+    <br><br><br>
+
+    <h1>Uppgift 2: Formulär</h1>
+
+    <form>
+        <label>Förnamn: </label><br>
+        <input id="firstName" type="text" class="textfield"><br>
+        <label>Efternamn: </label><br>
+        <input id="lastName" type="text" class="textfield"><br>
+        <label>E-postadress: </label><br>
+        <input id="email" type="text" class="textfield"><br>
+        <label>Lösenord: </label><br>
+        <input id="password" type="password" class="textfield"><br>
+        <label id="passwordInfoLabel"></label>
+        <br>
+        <label>Adress: </label><br>
+        <input id="address" type="text" class="textfield"><br>
+        <label>Postnummer: </label><br>
+        <input id="postcode" type="text" class="textfield"><br>
+        <label>Ort: </label><br>
+        <input id="city" type="text" class="textfield"><br>
+        <br>
+        <label>Ankomstdatum: </label><br>
+        <input id="arrivalDate" type="date" class="textfield"><br><br>
+        <label>Hemresedatum: </label><br>
+        <input id="leaveDate" type="date" class="textfield"><br>
+        <label id="evaluatedDatesLabel"></label><br>
+        <br>
+        <button id="sendButton" class="largebutton">Skicka</button>
+        <br>
+        <br>
+        <label id="sendLabel"></label>
+    </form>
+
+
+    <br><br><br>
+
+    <h1>Uppgift 3: Hänga Gubbe</h1>
+    <button id="startGame" class="largebutton">Starta spelet</button><br><br>
+    <label id="progressLabel" style="letter-spacing: 6px;"></label><br>
+    <label id="gameInfoLabel" style="color: green; "></label><br>
+    <canvas id="gameview" width="458" height="590" style="border: 1px solid #000000;"></canvas><br>
+    <button class="letterButton">A</button>
+    <button class="letterButton">B</button>
+    <button class="letterButton">C</button>
+    <button class="letterButton">D</button>
+    <button class="letterButton">E</button>
+    <button class="letterButton">F</button>
+    <button class="letterButton">G</button>
+    <button class="letterButton">H</button>
+    <button class="letterButton">I</button>
+    <button class="letterButton">J</button>
+    <button class="letterButton">K</button>
+    <button class="letterButton">L</button>
+    <button class="letterButton">M</button>
+    <button class="letterButton">N</button>
+    <button class="letterButton">O</button>
+    <button class="letterButton">P</button><br><br>
+    <button class="letterButton">Q</button>
+    <button class="letterButton">R</button>
+    <button class="letterButton">S</button>
+    <button class="letterButton">T</button>
+    <button class="letterButton">U</button>
+    <button class="letterButton">V</button>
+    <button class="letterButton">X</button>
+    <button class="letterButton">Y</button>
+    <button class="letterButton">Z</button>
+    <button class="letterButton">Å</button>
+    <button class="letterButton">Ä</button>
+    <button class="letterButton">Ö</button>
+
+    <br><br><br>
+    <h1>Uppgift 4: Interaktiva objekt</h1>
+    <br>
+
+    <div class="landingDiv">
+        <img src="img/home.png" id="homeImg" class="menuImg">
+        <img src="img/home_text.png" id="homeText" class="menuImgText"></p>
+    </div>
+    <div class="accountDiv">
+        <img src="img/account.png" id="accountImg" class="menuImg">
+        <img src="img/account_text.png" id="accountText" class="menuImgText"></p>
+    </div>
+    <div class="settingsDiv">
+        <img src="img/settings.png" id="settingsImg" class="menuImg">
+        <img src="img/settings_text.png" id="settingsText" class="menuImgText"></p>
+    </div>
+    <div class="privacyDiv">
+        <img src="img/privacypolicy.png" id="privacyImg" class="menuImg">
+        <img src="img/privacypolicy_text.png" id="privacyText" class="menuImgText"></p>
+    </div>
+
+<br><br>
+    <div>
+        <ul class="navigation">
+            <li class="navigation"><a href="#home" class="navigation">News</a></li>
+            <li class="navigation"><a href="#home" class="navigation">About</a></li>
+            <li class="navigation"><a href="#home" class="navigation">Contact</a></li>
+            <li class="navigation"><a href="#home" class="navigation">Store</a></li>
+        </ul>
+    </div>
+
+    <br>
+    <br>
+
+<div>
+    <ul class="dropdownMenu dropdownButton">
+        <h2 class="dropdownMenuItem"><img src="img/gamepad.png" class="gameImg"></img>Our Games</h2>
+        <li class="dropdown-list list">Hänga Gubbe</li>
+        <li class="dropdown-list list">World of Warcraft</li>
+        <li class="dropdown-list list">Europa Universalis IV</li>
+        <li class="dropdown-list list">Cyberpunk 2077</li>
+        </ul>
+</div>
+
+    <br>
+    <br>    <br>
+    <br>    <br>
+    <br>
+        
+</body>
+</html>
