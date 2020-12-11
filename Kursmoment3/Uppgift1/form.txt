@@ -1,4 +1,0 @@
-Name: Darth Vader
-Email: darth.vader@intergalacticempire.com
-Phone: 0700000000
-Address: Sith street 3
