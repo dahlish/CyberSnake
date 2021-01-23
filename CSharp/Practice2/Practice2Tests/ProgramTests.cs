@@ -9,6 +9,7 @@ namespace Practice2.Tests
     [TestClass()]
     public class ProgramTests
     {
+        #region PalindromeTests
         [TestMethod()]
         public void IsPalindromeTest()
         {
@@ -115,7 +116,9 @@ namespace Practice2.Tests
 
             Assert.AreEqual(expected, actual);
         }
+        #endregion
 
+        #region GuessingGameTests
         [TestMethod()]
         public void GuessingGameTest()
         {
@@ -140,5 +143,9 @@ namespace Practice2.Tests
 
             Assert.AreEqual(expected, actual);
         }
+        #endregion
+
+
     }
+
 }
