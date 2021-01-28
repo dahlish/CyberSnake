@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\Practice2.csproj": {}
+    "D:\\source\\repos\\Practice\\Practice\\Practice.csproj": {}
   },
   "projects": {
-    "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\Practice2.csproj": {
+    "D:\\source\\repos\\Practice\\Practice\\Practice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\Practice2.csproj",
-        "projectName": "Practice2",
-        "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\Practice2.csproj",
+        "projectUniqueName": "D:\\source\\repos\\Practice\\Practice\\Practice.csproj",
+        "projectName": "Practice",
+        "projectPath": "D:\\source\\repos\\Practice\\Practice\\Practice.csproj",
         "packagesPath": "C:\\Users\\zeke1\\.nuget\\packages\\",
-        "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\obj\\",
+        "outputPath": "D:\\source\\repos\\Practice\\Practice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

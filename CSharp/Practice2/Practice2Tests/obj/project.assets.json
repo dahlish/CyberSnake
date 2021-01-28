@@ -5733,23 +5733,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Christopher'\\.nuget\\packages\\": {},
+    "C:\\Users\\zeke1\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Christopher'\\source\\repos\\Practice2\\Practice2Tests\\Practice2Tests.csproj",
+      "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2Tests\\Practice2Tests.csproj",
       "projectName": "Practice2Tests",
-      "projectPath": "C:\\Users\\Christopher'\\source\\repos\\Practice2\\Practice2Tests\\Practice2Tests.csproj",
-      "packagesPath": "C:\\Users\\Christopher'\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Christopher'\\source\\repos\\Practice2\\Practice2Tests\\obj\\",
+      "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2Tests\\Practice2Tests.csproj",
+      "packagesPath": "C:\\Users\\zeke1\\.nuget\\packages\\",
+      "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Christopher'\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\zeke1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -5764,8 +5764,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Christopher'\\source\\repos\\Practice2\\Practice2\\Practice2.csproj": {
-              "projectPath": "C:\\Users\\Christopher'\\source\\repos\\Practice2\\Practice2\\Practice2.csproj"
+            "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\Practice2.csproj": {
+              "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Practice2\\Practice2\\Practice2.csproj"
             }
           }
         }
@@ -5812,7 +5812,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
