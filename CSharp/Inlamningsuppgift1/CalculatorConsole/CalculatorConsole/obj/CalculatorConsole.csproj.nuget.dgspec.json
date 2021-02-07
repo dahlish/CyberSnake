@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj": {}
+    "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj": {}
   },
   "projects": {
-    "D:\\Github\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj": {
+    "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj",
+        "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj",
         "projectName": "CalculatorConsole",
-        "projectPath": "D:\\Github\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj",
-        "packagesPath": "C:\\Users\\Christopher'\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\obj\\",
+        "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\CalculatorConsole.csproj",
+        "packagesPath": "C:\\Users\\zeke1\\.nuget\\packages\\",
+        "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\student\\CSharp\\Inlamningsuppgift1\\CalculatorConsole\\CalculatorConsole\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Christopher'\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zeke1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
