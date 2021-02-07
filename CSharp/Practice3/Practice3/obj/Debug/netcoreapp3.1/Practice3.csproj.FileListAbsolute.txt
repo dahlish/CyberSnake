@@ -1,0 +1,13 @@
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\bin\Debug\netcoreapp3.1\Practice3.exe
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\bin\Debug\netcoreapp3.1\Practice3.deps.json
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\bin\Debug\netcoreapp3.1\Practice3.runtimeconfig.json
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\bin\Debug\netcoreapp3.1\Practice3.runtimeconfig.dev.json
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\bin\Debug\netcoreapp3.1\Practice3.dll
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\bin\Debug\netcoreapp3.1\Practice3.pdb
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.csprojAssemblyReference.cache
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.AssemblyInfoInputs.cache
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.AssemblyInfo.cs
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.csproj.CoreCompileInputs.cache
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.dll
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.pdb
+F:\Repos\Github_ZquallTechnologies\student\CSharp\Practice3\Practice3\obj\Debug\netcoreapp3.1\Practice3.genruntimeconfig.cache
