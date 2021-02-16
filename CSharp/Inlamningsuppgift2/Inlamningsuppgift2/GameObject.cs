@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
+    public delegate void GameObjectCollisionEventHandler(object sender, GameObjectCollisionEventArgs args);
     public abstract class GameObject
     {
         private Position position;
         public Position Position { get => position; set => position = value; }
-        public event EventHandler<GameObjectCollisionEventArgs> Collision;
+        public event GameObjectCollisionEventHandler Collision;
         public GameWorld gameWorld;
 
         public virtual void Update()

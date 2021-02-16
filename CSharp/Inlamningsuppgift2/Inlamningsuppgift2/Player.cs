@@ -12,9 +12,7 @@ namespace Inlamningsuppgift2
         private int tailCounter = 0;
 
         public Direction Direction { get => direction; set => direction = value; }
-        public char Appearance { get => appearance; }
-        public List<Tail> Tail { get => tail; }
-        
+        public char Appearance { get => appearance; }        
 
         public Player(char appearance, Position pos, GameWorld world)
         {
@@ -42,7 +40,13 @@ namespace Inlamningsuppgift2
 
         public override void Update()
         {
-            Position previousPos = Position;
+            Move();
+            CheckCollision();
+            base.Update();
+        }
+
+        public void Move()
+        {
             if (direction == Direction.Up)
             {
                 Position = new Position(Position.X, Position.Y - 1);
@@ -59,20 +63,6 @@ namespace Inlamningsuppgift2
             {
                 Position = new Position(Position.X + 1, Position.Y);
             }
-
-            if (tail.Count > 0)
-            {
-                tail.Remove(tail[tail.Count - 1]);
-                gameWorld.AllObjects.Remove(tail[tail.Count - 1]);
-                if (tail.Count <= tailCounter)
-                {
-                    tail.Add(new Tail('0', previousPos, gameWorld));
-                    gameWorld.AllObjects.Add(tail[tail.Count - 1]);
-                }
-            }
-
-            CheckCollision();
-            base.Update();
         }
 
         public void CheckCollision()
@@ -103,8 +93,6 @@ namespace Inlamningsuppgift2
         public void IncreaseTail()
         {
             tailCounter++;
-            tail.Add(new Tail('0', this.Position, gameWorld));
-            gameWorld.AllObjects.Add(tail[tail.Count - 1]);
         }
     }
 }

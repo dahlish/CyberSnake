@@ -12,8 +12,6 @@ namespace Inlamningsuppgift2
             Console.CursorVisible = false;
             world = gameWorld;
             Console.SetWindowSize(1, 1);
-
-
             try
             {
                 Console.SetBufferSize(gameWorld.SizeX, gameWorld.SizeY);

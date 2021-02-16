@@ -15,6 +15,7 @@ namespace Inlamningsuppgift2
         {
             // Initialisera spelet
             const int frameRate = 30;
+            //double time = 0;
             GameWorld world = new GameWorld(50, 20);
             ConsoleRenderer renderer = new ConsoleRenderer(world);
             Player player = new Player('O', new Position(1, 1), world);
@@ -70,7 +71,9 @@ namespace Inlamningsuppgift2
                 double frameTime = Math.Ceiling((1000.0 / frameRate) - (DateTime.Now - before).TotalMilliseconds);
                 if (frameTime > 0)
                 {
+                    //time += 0.5 / 10;
                     // Vänta rätt antal millisekunder innan loopens nästa varv
+                    //Console.Title = $"CyberSnake 2077 v1.0 - Time: {Math.Round(time, 1)}  Score: {world.Score}";
                     Thread.Sleep((int)frameTime);
                 }
             }

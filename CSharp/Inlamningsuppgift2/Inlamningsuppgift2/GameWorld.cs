@@ -28,7 +28,7 @@ namespace Inlamningsuppgift2
 
         public void Update()
         {
-            Console.Title = $"Cyberpunk 2077 v1.0 - Score: {score}";
+            Console.Title = $"CyberSnake 2077 v1.0 - Score: {score}";
             for (int i = allObjects.Count - 1; i >= 0; i--)
             {
                 allObjects[i].Update();
