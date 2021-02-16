@@ -10,6 +10,7 @@ namespace Inlamningsuppgift2
         private char appearance;
         private List<Tail> tail = new List<Tail>();
         private int tailCounter = 0;
+        private Position previousPos;
 
         public Direction Direction { get => direction; set => direction = value; }
         public char Appearance { get => appearance; }        
@@ -20,10 +21,10 @@ namespace Inlamningsuppgift2
             Position = pos;
             base.gameWorld = world;
 
-            Collision += Player_Collision;
+            OnCollision += Player_OnCollision;
         }
 
-        private void Player_Collision(object sender, GameObjectCollisionEventArgs e)
+        private void Player_OnCollision(object sender, GameObjectOnCollisionEventArgs e)
         {
             if (e.collidedGameObject is Food)
             {
@@ -33,8 +34,7 @@ namespace Inlamningsuppgift2
 
         public void EatFood(Food f)
         {
-            f.Destroy(f, gameWorld);
-            gameWorld.IncreaseScore();
+            f.Destroy(gameWorld, this);
             IncreaseTail();
         }
 
@@ -47,6 +47,7 @@ namespace Inlamningsuppgift2
 
         public void Move()
         {
+            previousPos = Position;
             if (direction == Direction.Up)
             {
                 Position = new Position(Position.X, Position.Y - 1);
@@ -70,23 +71,19 @@ namespace Inlamningsuppgift2
             if (Position.X < 0)
             {
                 Position = new Position(Console.WindowWidth - 1, Position.Y);
-                direction = Direction.None;
             }
             else if (Position.X >= Console.WindowWidth)
             {
                 Position = new Position(0, Position.Y);
-                direction = Direction.None;
             }
 
-            if (Position.Y < 0)
+            if (Position.Y < 1)
             {
                 Position = new Position(Position.X, Console.WindowHeight - 1);
-                direction = Direction.None;
             }
             else if (Position.Y >= Console.WindowHeight)
             {
-                Position = new Position(Position.X, 0);
-                direction = Direction.None;
+                Position = new Position(Position.X, 1);
             }
         }
 

@@ -14,6 +14,15 @@ namespace Inlamningsuppgift2
             this.appearance = appearance;
             Position = pos;
             base.gameWorld = world;
+            OnDestroy += Food_OnDestroy;
+        }
+
+        private void Food_OnDestroy(object sender, GameObjectOnDestroyEventArgs args)
+        {
+            if (args.destroyedByObject is Player)
+            {
+                gameWorld.IncreaseScore();
+            }
         }
 
         public override void Update()

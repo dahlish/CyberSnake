@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Inlamningsuppgift2
 {
@@ -14,8 +15,7 @@ namespace Inlamningsuppgift2
         static void Loop()
         {
             // Initialisera spelet
-            const int frameRate = 30;
-            //double time = 0;
+            const int frameRate = 5;
             GameWorld world = new GameWorld(50, 20);
             ConsoleRenderer renderer = new ConsoleRenderer(world);
             Player player = new Player('O', new Position(1, 1), world);
@@ -25,13 +25,11 @@ namespace Inlamningsuppgift2
             // ...
 
             // Huvudloopen
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
             bool running = true;
             while (running)
             {
-                if (!world.FoodExists)
-                {
-                    world.CreateFood();
-                }
                 // Kom ihåg vad klockan var i början
                 DateTime before = DateTime.Now;
 
@@ -55,7 +53,7 @@ namespace Inlamningsuppgift2
                         running = false;
                         break;
                     default:
-                        player.Direction = Direction.None;
+                        //player.Direction = Direction.None;
                         break;
 
                         // TODO Lägg till logik för andra knapptryckningar
@@ -69,11 +67,12 @@ namespace Inlamningsuppgift2
 
                 // Mät hur lång tid det tog
                 double frameTime = Math.Ceiling((1000.0 / frameRate) - (DateTime.Now - before).TotalMilliseconds);
+                world.ElapsedTime += (float)(frameTime + frameTime) * 0.001f;
+
                 if (frameTime > 0)
                 {
-                    //time += 0.5 / 10;
                     // Vänta rätt antal millisekunder innan loopens nästa varv
-                    //Console.Title = $"CyberSnake 2077 v1.0 - Time: {Math.Round(time, 1)}  Score: {world.Score}";
+                    Console.Title = $"CyberSnake 2077 v1.1 - Time: {MathF.Round(world.ElapsedTime, 1)}  Score: {world.Score} Actual: {(double)(watch.ElapsedMilliseconds / 1000.0f)}";
                     Thread.Sleep((int)frameTime);
                 }
             }

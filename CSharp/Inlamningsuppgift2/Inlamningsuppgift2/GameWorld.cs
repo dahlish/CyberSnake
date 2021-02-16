@@ -11,11 +11,13 @@ namespace Inlamningsuppgift2
         private int score;
         private List<GameObject> allObjects;
         private bool foodExists;
+        private float elapsedTime;
 
         public int SizeX { get => sizeX; }
         public int SizeY { get => sizeY; }
         public int Score { get => score; }
         public bool FoodExists { get => foodExists; }
+        public float ElapsedTime { get => elapsedTime; set => elapsedTime = value; }
         public List<GameObject> AllObjects { get => allObjects; }
 
         public GameWorld(int sizeX, int sizeY)
@@ -24,21 +26,26 @@ namespace Inlamningsuppgift2
             allObjects = new List<GameObject>();
             this.sizeX = sizeX;
             this.sizeY = sizeY;
+            elapsedTime = 0;
         }
 
         public void Update()
         {
-            Console.Title = $"CyberSnake 2077 v1.0 - Score: {score}";
             for (int i = allObjects.Count - 1; i >= 0; i--)
             {
                 allObjects[i].Update();
+            }
+
+            if (!foodExists)
+            {
+                CreateFood();
             }
         }
 
         public void CreateFood()
         {
             Random rand = new Random();
-            Food food = new Food('*', new Position(rand.Next(0, Console.WindowWidth), rand.Next(0, Console.WindowHeight)), this);
+            Food food = new Food('*', new Position(rand.Next(0, Console.WindowWidth), rand.Next(1, Console.WindowHeight)), this);
             allObjects.Add(food);
             foodExists = true;
         }

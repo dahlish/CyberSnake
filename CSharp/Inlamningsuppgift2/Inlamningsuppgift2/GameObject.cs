@@ -4,12 +4,15 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
-    public delegate void GameObjectCollisionEventHandler(object sender, GameObjectCollisionEventArgs args);
     public abstract class GameObject
     {
+        public delegate void GameObjectOnCollisionEventHandler(object sender, GameObjectOnCollisionEventArgs args);
+        public delegate void GameObjectOnDestroyEventHandler(object sender, GameObjectOnDestroyEventArgs args);
+
         private Position position;
         public Position Position { get => position; set => position = value; }
-        public event GameObjectCollisionEventHandler Collision;
+        public event GameObjectOnCollisionEventHandler OnCollision;
+        public event GameObjectOnDestroyEventHandler OnDestroy;
         public GameWorld gameWorld;
 
         public virtual void Update()
@@ -20,15 +23,17 @@ namespace Inlamningsuppgift2
             {
                 if (allObjects[i].Position == position && allObjects[i] != this)
                 {
-                    GameObjectCollisionEventArgs args = new GameObjectCollisionEventArgs { collidedGameObject = allObjects[i] };
-                    Collision?.Invoke(this, args);
+                    GameObjectOnCollisionEventArgs args = new GameObjectOnCollisionEventArgs { collidedGameObject = allObjects[i] };
+                    OnCollision?.Invoke(this, args);
                 }
             }
         }
 
-        public virtual void Destroy(GameObject obj, GameWorld world)
+        public virtual void Destroy(GameWorld world, GameObject destroyedByObject)
         {
-            world.AllObjects.Remove(obj);
+            world.AllObjects.Remove(this);
+            GameObjectOnDestroyEventArgs args = new GameObjectOnDestroyEventArgs { destroyedObject = this, timeElapsed = world.ElapsedTime, destroyedByObject = destroyedByObject};
+            OnDestroy?.Invoke(this, args);
         }
     }
 }

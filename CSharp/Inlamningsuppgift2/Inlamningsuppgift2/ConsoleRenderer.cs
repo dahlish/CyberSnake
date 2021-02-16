@@ -26,6 +26,8 @@ namespace Inlamningsuppgift2
 
         public void Render()
         {
+            Console.SetCursorPosition(0, 0);
+            Console.Write("Score: " + world.Score);
             foreach (var item in world.AllObjects)
             {
                 if (item is IRenderable)
@@ -39,6 +41,8 @@ namespace Inlamningsuppgift2
 
         public void RenderBlank()
         {
+            Console.SetCursorPosition(0, 0);
+            Console.Write("Score: " + world.Score + "\n");
             foreach (var item in world.AllObjects)
             {
                 if (item is IRenderable)
