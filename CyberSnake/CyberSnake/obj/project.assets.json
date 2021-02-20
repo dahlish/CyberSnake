@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\Inlamningsuppgift2\\CyberSnake\\CyberSnake.csproj",
+      "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
       "projectName": "CyberSnake",
-      "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\Inlamningsuppgift2\\CyberSnake\\CyberSnake.csproj",
+      "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
       "packagesPath": "C:\\Users\\zeke1\\.nuget\\packages\\",
-      "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\Inlamningsuppgift2\\CyberSnake\\obj\\",
+      "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

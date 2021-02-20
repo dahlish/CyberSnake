@@ -24,3 +24,16 @@ F:\Repos\Github_ZquallTechnologies\CyberSnake\Inlamningsuppgift2\CyberSnake\obj\
 F:\Repos\Github_ZquallTechnologies\CyberSnake\Inlamningsuppgift2\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.dll
 F:\Repos\Github_ZquallTechnologies\CyberSnake\Inlamningsuppgift2\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.pdb
 F:\Repos\Github_ZquallTechnologies\CyberSnake\Inlamningsuppgift2\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.genruntimeconfig.cache
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\CyberSnake.exe
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\CyberSnake.deps.json
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\CyberSnake.runtimeconfig.json
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\CyberSnake.runtimeconfig.dev.json
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\CyberSnake.dll
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\CyberSnake.pdb
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.csprojAssemblyReference.cache
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.AssemblyInfoInputs.cache
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.AssemblyInfo.cs
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.csproj.CoreCompileInputs.cache
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.dll
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.pdb
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.genruntimeconfig.cache
