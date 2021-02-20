@@ -11,6 +11,7 @@ namespace Inlamningsuppgift2
         private List<Tail> tail = new List<Tail>();
         private int tailCounter = 0;
         private Position previousPosition;
+        private Direction previousDirection;
 
         public Direction Direction { get => direction; set => direction = value; }
         public char Appearance { get => appearance; }        
@@ -101,12 +102,12 @@ namespace Inlamningsuppgift2
 
         public void GenerateTail()
         {
-            tail.Insert(0, new Tail('8', previousPosition, GameWorld));
+            tail.Insert(0, new Tail('O', previousPosition, GameWorld));
             Tail tailToRemove = tail[tail.Count - 1];
 
             if (tail.Count < tailCounter)
             {
-                tail.Insert(0, new Tail('8', previousPosition, GameWorld));
+                tail.Insert(0, new Tail('O', previousPosition, GameWorld));
             }
             else if (tail.Count > tailCounter)
             {

@@ -11,8 +11,8 @@ namespace Inlamningsuppgift2
         private int score;
         private List<GameObject> allObjects;
         private float elapsedTime;
-        private int foodAmount;
-        private int foodMax;
+        private int foodAmount = 0;
+        private int foodMax = 1;
         private bool specialFoodSpawnedAlready = false;
         private float timeLastFoodEaten;
         private bool wallsCreated = false;
@@ -36,15 +36,14 @@ namespace Inlamningsuppgift2
         public bool GameIsOver { get => gameIsOver; }
         public int StarvationTime { get => starvationTime; }
 
-        public GameWorld(int sizeX, int sizeY, Difficulty difficulty)
+        public GameWorld(int sizeX, int sizeY, Difficulty difficulty, bool wallsCreated = true)
         {
+            this.wallsCreated = wallsCreated;
             score = 0;
             allObjects = new List<GameObject>();
             this.sizeX = sizeX;
             this.sizeY = sizeY;
             elapsedTime = 0;
-            foodMax = 1;
-            FoodAmount = 0;
             this.difficulty = difficulty;
 
             switch(difficulty)
@@ -106,7 +105,7 @@ namespace Inlamningsuppgift2
             if (score >= spawnSpecialFoodAtScore && score != 0 && !specialFoodSpawnedAlready)
             {
                 specialFoodSpawnedAlready = true;
-                Food food = Food.Create('+', Position.GetRandomPosition(), this, FoodType.Special, 7);
+                Food food = Food.Create('+', Position.GetRandomPosition(), this, FoodType.Special, 8 - (int)difficulty);
                 Food foodNormal = Food.Create('*', Position.GetRandomPosition(), this, FoodType.Normal);
                 allObjects.Add(food);
                 allObjects.Add(foodNormal);
@@ -115,7 +114,7 @@ namespace Inlamningsuppgift2
             }
             else
             {
-                Food food = Food.Create('*', Position.GetRandomPosition(), this, FoodType.Normal);
+                Food food = Food.Create('*', Position.GetRandomPosition(), this, FoodType.Normal, 12 - (int)difficulty);
                 allObjects.Add(food);
                 specialFoodSpawnedAlready = false;
             }

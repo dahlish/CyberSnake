@@ -11,61 +11,61 @@ namespace Inlamningsuppgift2
         /// Checks Console to see if a keyboard key has been pressed, if so returns it as uppercase, otherwise returns '\0'.
         /// </summary>
         static char ReadKeyIfExists() => Console.KeyAvailable ? Console.ReadKey(intercept: true).Key.ToString().ToUpper()[0] : '\0';
+        static bool doNotRenderWalls = false;
         static Statistics playerStats;
 
         static void Loop(Difficulty difficulty)
         {
             // Initialisera spelet
-            GameWorld world = new GameWorld(50, 20, difficulty);
+            GameWorld world = new GameWorld(50, 20, difficulty, doNotRenderWalls);
 
             int frameRate = 5 * (int)difficulty;
             int frameCounter = 0;
 
             ConsoleRenderer renderer = new ConsoleRenderer(world);
-            Player player = new Player('O', Position.GetRandomPosition(), world);
+            Player player = new Player('8', Position.GetRandomPosition(), world);
             player.Direction = Direction.None;
             world.AllObjects.Add(player);
 
-
-            // TODO Skapa spelare och andra objekt etc. genom korrekta anrop till vår GameWorld-instans
-            // ...
-
-            // Huvudloopen
             bool running = true;
             while (running)
             {
                 frameCounter++;
-                // Kom ihåg vad klockan var i början
                 DateTime before = DateTime.Now;
 
-                // Hantera knapptryckningar från användaren
                 char key = ReadKeyIfExists();
                 switch (key)
                 {
                     case 'W':
-                        player.Direction = Direction.Up;
+                        if (player.Direction != Direction.Down)
+                        {
+                            player.Direction = Direction.Up;
+                        }
                         break;
                     case 'S':
-                        player.Direction = Direction.Down;
+                        if (player.Direction != Direction.Up)
+                        {
+                            player.Direction = Direction.Down;
+                        }
                         break;
                     case 'A':
-                        player.Direction = Direction.Left;
+                        if (player.Direction != Direction.Right)
+                        {
+                            player.Direction = Direction.Left;
+                        }
                         break;
                     case 'D':
-                        player.Direction = Direction.Right;
+                        if (player.Direction != Direction.Left)
+                        {
+                            player.Direction = Direction.Right;
+                        }
                         break;
                     case 'Q':
                         running = false;
+                        world.GameOver();
                         break;
-                    default:
-                        //player.Direction = Direction.None;
-                        break;
-
-                        // TODO Lägg till logik för andra knapptryckningar
-                        // ...
                 }
 
-                // Uppdatera världen och rendera om
                 renderer.RenderBlank();
                 world.Update();
                 renderer.Render();
@@ -75,7 +75,7 @@ namespace Inlamningsuppgift2
                 {
                     playerStats = world.GetGameStats();
                 }
-                // Mät hur lång tid det tog
+
                 double frameTime = Math.Ceiling((1000.0 / frameRate) - (DateTime.Now - before).TotalMilliseconds);
 
                 if (frameCounter >= frameRate)
@@ -107,22 +107,31 @@ namespace Inlamningsuppgift2
                     case "1":
                         Console.WriteLine("Choose a difficulty: \n1. Easy\n2. Medium\n3. Hard\n4. Very Hard");
                         string difficultyInput = Console.ReadLine();
-                        int.TryParse(difficultyInput, out int difficulty);
-
-                        if (difficulty <= 0 || difficulty > 4)
+                        if (difficultyInput != "nowalls")
                         {
-                            Console.WriteLine("You didn't choose a difficulty.");
-                            break;
+                            int.TryParse(difficultyInput, out int difficulty);
+
+                            if (difficulty <= 0 || difficulty > 4)
+                            {
+                                Console.WriteLine("You didn't choose a difficulty.");
+                                break;
+                            }
+                            Console.Clear();
+                            Loop((Difficulty)difficulty);
                         }
-                        Console.Clear();
-                        Loop((Difficulty)difficulty);
+                        else
+                        {
+                            Console.Clear();
+                            doNotRenderWalls = true;
+                            Loop(Difficulty.VeryHard);
+                            doNotRenderWalls = false;
+                        }
                         Console.Clear();
                         PostGameStats();
                         break;
-
                     case "2":
+                        PostHighScore();
                         break;
-
                     case "3":
                         PostGameInfo();
                         break;
@@ -132,12 +141,15 @@ namespace Inlamningsuppgift2
                 }
 
             } while (keepRunning);
-            // Vi kan ev. ha någon meny här, men annars börjar vi bara spelet direkt
-            //Console.Clear();
+        }
+        static void PostHighScore()
+        {
+            Console.WriteLine($"Your highest score is {Statistics.GetHighestScore()}.");
         }
         static void PostGameInfo()
         {
-            Console.WriteLine($"{GameInfo.Name} by {GameInfo.Author}\nCurrent version: {GameInfo.Version}\nGame Controls: Move with WASD.\nColliding with walls or yourself ends up in game over.\n\n");
+            Console.WriteLine($"{GameInfo.Name} by {GameInfo.Author}\nCurrent version: {GameInfo.Version}\nGame Controls: Move with WASD.\nColliding with walls or yourself ends up in game over.\n" +
+                $"Press Q at any time to end the game.\n\n");
         }
         static void PostGameStats()
         {

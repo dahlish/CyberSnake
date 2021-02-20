@@ -31,7 +31,7 @@ namespace Inlamningsuppgift2
 
         private void Food_OnCollision(object sender, GameObjectOnCollisionEventArgs args)
         {
-            if (args.collidedGameObject is Wall)
+            if (args.collidedGameObject is Wall || args.collidedGameObject is Tail)
             {
                 Destroy(GameWorld, this);
             }

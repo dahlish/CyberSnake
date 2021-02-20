@@ -47,6 +47,20 @@ namespace Inlamningsuppgift2
 
         }
 
+        public static int GetHighestScore()
+        {
+            if (File.Exists("score.dat"))
+            {
+                int.TryParse(File.ReadLines("score.dat").First(), out int scoreInt);
+
+                return scoreInt;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public string DifficultyToString()
         {
             switch (difficultyPlayed)
