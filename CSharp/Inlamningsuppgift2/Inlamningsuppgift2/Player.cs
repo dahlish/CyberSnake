@@ -8,18 +8,16 @@ namespace Inlamningsuppgift2
     {
         private Direction direction;
         private char appearance;
-        private List<Tail> tail = new List<Tail>();
+        private Queue<Tail> tail = new Queue<Tail>();
         private int tailCounter = 0;
         private Position previousPos;
 
         public Direction Direction { get => direction; set => direction = value; }
         public char Appearance { get => appearance; }        
 
-        public Player(char appearance, Position pos, GameWorld world)
+        public Player(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
             this.appearance = appearance;
-            Position = pos;
-            base.gameWorld = world;
 
             OnCollision += Player_OnCollision;
         }
@@ -34,7 +32,8 @@ namespace Inlamningsuppgift2
 
         public void EatFood(Food f)
         {
-            f.Destroy(gameWorld, this);
+            f.Destroy(GameWorld, this);
+            GameWorld.TimeLastFoodEaten = GameWorld.ElapsedTime;
             IncreaseTail();
         }
 

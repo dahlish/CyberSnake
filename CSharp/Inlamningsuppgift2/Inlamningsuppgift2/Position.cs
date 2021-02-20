@@ -43,5 +43,12 @@ namespace Inlamningsuppgift2
             return new Position(p1.x - p2.x, p1.y - p2.y);
 
         }
+
+        public static Position GetRandomPosition()
+        {
+            Random rand = new Random();
+
+            return new Position(rand.Next(0, Console.WindowWidth), rand.Next(1, Console.WindowHeight));
+        }
     }
 }

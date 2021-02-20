@@ -16,6 +16,7 @@ namespace Inlamningsuppgift2
         {
             // Initialisera spelet
             const int frameRate = 5;
+            int frameCounter = 0;
             GameWorld world = new GameWorld(50, 20);
             ConsoleRenderer renderer = new ConsoleRenderer(world);
             Player player = new Player('O', new Position(1, 1), world);
@@ -30,6 +31,7 @@ namespace Inlamningsuppgift2
             bool running = true;
             while (running)
             {
+                frameCounter++;
                 // Kom ihåg vad klockan var i början
                 DateTime before = DateTime.Now;
 
@@ -67,7 +69,12 @@ namespace Inlamningsuppgift2
 
                 // Mät hur lång tid det tog
                 double frameTime = Math.Ceiling((1000.0 / frameRate) - (DateTime.Now - before).TotalMilliseconds);
-                world.ElapsedTime += (float)(frameTime + frameTime) * 0.001f;
+
+                if (frameCounter >= frameRate)
+                {
+                    world.TimeElapsedTick();
+                    frameCounter = 0;
+                }
 
                 if (frameTime > 0)
                 {

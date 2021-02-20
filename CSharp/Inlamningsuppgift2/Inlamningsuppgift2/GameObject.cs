@@ -10,10 +10,17 @@ namespace Inlamningsuppgift2
         public delegate void GameObjectOnDestroyEventHandler(object sender, GameObjectOnDestroyEventArgs args);
 
         private Position position;
+        private GameWorld gameWorld;
         public Position Position { get => position; set => position = value; }
         public event GameObjectOnCollisionEventHandler OnCollision;
         public event GameObjectOnDestroyEventHandler OnDestroy;
-        public GameWorld gameWorld;
+        public GameWorld GameWorld { get => gameWorld; }
+
+        public GameObject(GameWorld gameWorld, Position position)
+        {
+            this.position = position;
+            this.gameWorld = gameWorld;
+        }
 
         public virtual void Update()
         {
