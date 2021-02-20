@@ -15,6 +15,14 @@ namespace Inlamningsuppgift2
         private int foodMax;
         private bool specialFoodSpawnedAlready = false;
         private float timeLastFoodEaten;
+        private bool wallsCreated = false;
+        private Difficulty difficulty;
+        private int amountOfWallGroups = 0;
+        private int wallGroupMaxAmount = 0;
+        private Statistics gameStats;
+        private bool gameIsOver = false;
+        private int spawnSpecialFoodAtScore = 5;
+        private int starvationTime = 30;
 
         public int SizeX { get => sizeX; }
         public int SizeY { get => sizeY; }
@@ -24,8 +32,11 @@ namespace Inlamningsuppgift2
         public float ElapsedTime { get => elapsedTime; }
         public float TimeLastFoodEaten { get => timeLastFoodEaten; set => timeLastFoodEaten = value; }
         public List<GameObject> AllObjects { get => allObjects; }
+        public Difficulty Difficulty { get => difficulty; }
+        public bool GameIsOver { get => gameIsOver; }
+        public int StarvationTime { get => starvationTime; }
 
-        public GameWorld(int sizeX, int sizeY)
+        public GameWorld(int sizeX, int sizeY, Difficulty difficulty)
         {
             score = 0;
             allObjects = new List<GameObject>();
@@ -34,6 +45,31 @@ namespace Inlamningsuppgift2
             elapsedTime = 0;
             foodMax = 1;
             FoodAmount = 0;
+            this.difficulty = difficulty;
+
+            switch(difficulty)
+            {
+                case Difficulty.Easy:
+                    amountOfWallGroups = 0;
+                    wallGroupMaxAmount = 0;
+                    starvationTime = 30;
+                    break;
+                case Difficulty.Medium:
+                    amountOfWallGroups = 2;
+                    wallGroupMaxAmount = 3;
+                    starvationTime = 20;
+                    break;
+                case Difficulty.Hard:
+                    amountOfWallGroups = 4;
+                    wallGroupMaxAmount = 7;
+                    starvationTime = 15;
+                    break;
+                case Difficulty.VeryHard:
+                    amountOfWallGroups = 6;
+                    wallGroupMaxAmount = 10;
+                    starvationTime = 10;
+                    break;
+            }
         }
 
         public void Update()
@@ -43,6 +79,16 @@ namespace Inlamningsuppgift2
             if (foodAmount < foodMax)
             {
                 CreateFood();
+            }
+
+            if (!wallsCreated)
+            {
+                for (int i = 0; i < amountOfWallGroups; i++)
+                {
+                    WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPosition());
+                    walls.Generate();
+                }
+                wallsCreated = true;
             }
         }
 
@@ -57,13 +103,14 @@ namespace Inlamningsuppgift2
         public void CreateFood()
         {
             Random rand = new Random();
-            if (score % 3 == 0 && score != 0 && !specialFoodSpawnedAlready)
+            if (score >= spawnSpecialFoodAtScore && score != 0 && !specialFoodSpawnedAlready)
             {
                 specialFoodSpawnedAlready = true;
                 Food food = Food.Create('+', Position.GetRandomPosition(), this, FoodType.Special, 7);
                 Food foodNormal = Food.Create('*', Position.GetRandomPosition(), this, FoodType.Normal);
                 allObjects.Add(food);
                 allObjects.Add(foodNormal);
+                spawnSpecialFoodAtScore = score + rand.Next(5, 20);
                 foodAmount++;
             }
             else
@@ -85,15 +132,50 @@ namespace Inlamningsuppgift2
         {
             elapsedTime += 1;
 
-            if (timeLastFoodEaten + elapsedTime >= 30)
+            if (elapsedTime - timeLastFoodEaten >= starvationTime)
             {
                 GameOver();
             }
         }
 
+        public Player GetPlayer()
+        {
+            for (int i = allObjects.Count - 1; i >= 0; i--)
+            {
+                if (allObjects[i] is Player)
+                {
+                    return allObjects[i] as Player;
+                }
+            }
+
+            return null;
+        }
+
         public void GameOver()
         {
-            throw new NotImplementedException();
+            gameIsOver = true;
         }
+
+        public Statistics GetGameStats()
+        {
+            return new Statistics(Score, GetPlayer().Tail.Count, Difficulty, ElapsedTime);
+        }
+    }
+
+    public enum Difficulty
+    {
+        Easy = 1,
+        Medium = 2,
+        Hard = 3,
+        VeryHard = 4
+    }
+
+    public enum Direction
+    {
+        Up = 0,
+        Down = 1,
+        Left = 2,
+        Right = 3,
+        None = 4
     }
 }
