@@ -4,16 +4,18 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
-    class Player : GameObject, IMovable, IRenderable
+    public class Player : GameObject, IMovable, IRenderable
     {
         private Direction direction;
         private char appearance;
-        private Queue<Tail> tail = new Queue<Tail>();
+        private List<Tail> tail = new List<Tail>();
         private int tailCounter = 0;
-        private Position previousPos;
+        private Position previousPosition;
 
         public Direction Direction { get => direction; set => direction = value; }
         public char Appearance { get => appearance; }        
+        public Position PreviousPosition { get => previousPosition; }
+        public List<Tail> Tail { get => tail; set => tail = value; }
 
         public Player(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
@@ -28,25 +30,34 @@ namespace Inlamningsuppgift2
             {
                 EatFood(e.collidedGameObject as Food);
             }
+            else if (e.collidedGameObject is Tail)
+            {
+                GameWorld.GameOver();
+            }
+            else if (e.collidedGameObject is Wall)
+            {
+                GameWorld.GameOver();
+            }
         }
 
         public void EatFood(Food f)
         {
             f.Destroy(GameWorld, this);
             GameWorld.TimeLastFoodEaten = GameWorld.ElapsedTime;
-            IncreaseTail();
+            tailCounter++;
         }
 
         public override void Update()
         {
+            GenerateTail();
             Move();
             CheckCollision();
+
             base.Update();
         }
 
         public void Move()
         {
-            previousPos = Position;
             if (direction == Direction.Up)
             {
                 Position = new Position(Position.X, Position.Y - 1);
@@ -84,11 +95,24 @@ namespace Inlamningsuppgift2
             {
                 Position = new Position(Position.X, 1);
             }
+
+            previousPosition = Position;
         }
 
-        public void IncreaseTail()
+        public void GenerateTail()
         {
-            tailCounter++;
+            tail.Insert(0, new Tail('8', previousPosition, GameWorld));
+            Tail tailToRemove = tail[tail.Count - 1];
+
+            if (tail.Count < tailCounter)
+            {
+                tail.Insert(0, new Tail('8', previousPosition, GameWorld));
+            }
+            else if (tail.Count > tailCounter)
+            {
+                GameWorld.AllObjects.Remove(tailToRemove);
+                tail.RemoveAt(tail.Count - 1);
+            }
         }
     }
 }

@@ -61,12 +61,35 @@ namespace Inlamningsuppgift2
             int windowWidth = Console.WindowWidth;
             Console.BackgroundColor = ConsoleColor.Cyan;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine("{0, -" + windowWidth + "}", "Score: " + world.Score);
+            Console.WriteLine("{0, -" + windowWidth + "}", $"Score: {world.Score} | Starvation Timer ({world.StarvationTime}): " + (world.ElapsedTime - world.TimeLastFoodEaten));
         }
         public void ResetConsoleColors()
         {
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static bool CheckOutOfBounds(Position position)
+        {
+            if (position.X <= 0)
+            {
+                return true;
+            }
+            else if (position.X >= Console.WindowWidth)
+            {
+                return true;
+            }
+
+            if (position.Y < 1)
+            {
+                return true;
+            }
+            else if (position.Y >= Console.WindowHeight)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

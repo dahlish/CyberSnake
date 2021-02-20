@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
-    class Food : GameObject, IRenderable
+    public class Food : GameObject, IRenderable
     {
         public delegate void OnFoodExpiredEventHandler(object sender);
         public event OnFoodExpiredEventHandler OnFoodExpired;
@@ -26,6 +26,15 @@ namespace Inlamningsuppgift2
             createdTime = gameWorld.ElapsedTime;
             OnDestroy += Food_OnDestroy;
             OnFoodExpired += Food_OnFoodExpired;
+            OnCollision += Food_OnCollision;
+        }
+
+        private void Food_OnCollision(object sender, GameObjectOnCollisionEventArgs args)
+        {
+            if (args.collidedGameObject is Wall)
+            {
+                Destroy(GameWorld, this);
+            }
         }
 
         private void Food_OnFoodExpired(object sender)
@@ -50,7 +59,7 @@ namespace Inlamningsuppgift2
         {
             if (createdTime + maxTime <= GameWorld.ElapsedTime)
             {
-                OnFoodExpired(this);
+                OnFoodExpired?.Invoke(this);
             }
 
             base.Update();
@@ -65,6 +74,6 @@ namespace Inlamningsuppgift2
     public enum FoodType
     {
         Normal = 1,
-        Special = 2
+        Special = 3
     }
 }
