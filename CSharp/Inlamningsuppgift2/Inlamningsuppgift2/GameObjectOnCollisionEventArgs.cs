@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
-    public class GameObjectCollisionEventArgs : EventArgs
+    public class GameObjectOnCollisionEventArgs : EventArgs
     {
         public GameObject collidedGameObject;
     }

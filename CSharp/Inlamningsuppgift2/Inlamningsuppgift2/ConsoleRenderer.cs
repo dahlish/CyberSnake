@@ -26,6 +26,10 @@ namespace Inlamningsuppgift2
 
         public void Render()
         {
+            Console.SetCursorPosition(0, 0);
+            RenderUserInterface();
+            ResetConsoleColors();
+
             foreach (var item in world.AllObjects)
             {
                 if (item is IRenderable)
@@ -39,6 +43,8 @@ namespace Inlamningsuppgift2
 
         public void RenderBlank()
         {
+            Console.SetCursorPosition(0, 0);
+
             foreach (var item in world.AllObjects)
             {
                 if (item is IRenderable)
@@ -48,6 +54,19 @@ namespace Inlamningsuppgift2
                     Console.Write(' ');
                 }
             }
+        }
+
+        public void RenderUserInterface()
+        {
+            int windowWidth = Console.WindowWidth;
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("{0, -" + windowWidth + "}", "Score: " + world.Score);
+        }
+        public void ResetConsoleColors()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

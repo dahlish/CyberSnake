@@ -8,15 +8,12 @@ namespace Inlamningsuppgift2
     {
         private char appearance;
         private Direction direction;
-
         public char Appearance { get => appearance; }
-        public Direction Direction { get => direction; }
+        public Direction Direction { get => Direction; set => direction = value; }
 
-        public Tail(char appearance, Position pos, GameWorld world)
+        public Tail(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
-            gameWorld = world;
             this.appearance = appearance;
-            Position = pos;
         }
 
         public override void Update()

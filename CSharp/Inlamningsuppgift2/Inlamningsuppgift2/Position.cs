@@ -7,20 +7,10 @@ namespace Inlamningsuppgift2
     public struct Position
     {
         private int x;
-
-        public int X
-        {
-            get { return x; }
-            set { x = value; }
-        }
-
         private int y;
 
-        public int Y
-        {
-            get { return y; }
-            set { y = value; }
-        }
+        public int X { get => x; set => x = value; }
+        public int Y { get => y; set => y = value; }
 
         public Position(int x, int y)
         {
@@ -52,6 +42,13 @@ namespace Inlamningsuppgift2
         {
             return new Position(p1.x - p2.x, p1.y - p2.y);
 
+        }
+
+        public static Position GetRandomPosition()
+        {
+            Random rand = new Random();
+
+            return new Position(rand.Next(0, Console.WindowWidth), rand.Next(1, Console.WindowHeight));
         }
     }
 }
