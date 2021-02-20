@@ -4,44 +4,35 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
+    /// <summary>
+    /// This class describes the players Tail.
+    /// </summary>
     public class Tail : GameObject, IRenderable
     {
         private char appearance;
-        private Player player;
         public char Appearance { get => appearance; }
 
+        /// <summary>
+        /// Creates a new Tail object and spawns it in the game world.
+        /// </summary>
+        /// <param name="appearance">The appearance of the tail.</param>
+        /// <param name="position">The position to spawn it on.</param>
+        /// <param name="gameWorld">The world this object belongs to.</param>
         public Tail(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
             this.appearance = appearance;
-            player = gameWorld.GetPlayer();
             GameWorld.AllObjects.Add(this);
         }
 
+        /// <summary>
+        /// This method is called on every frame.
+        /// Only checks if the tail is out of bounds from the console or collides with another gameobject.
+        /// </summary>
         public override void Update()
         {
-            CheckCollision();
+            CheckConsoleBorderCollision();
             base.Update();
         }
 
-        public void CheckCollision()
-        {
-            if (Position.X < 0)
-            {
-                Position = new Position(Console.WindowWidth - 1, Position.Y);
-            }
-            else if (Position.X >= Console.WindowWidth)
-            {
-                Position = new Position(0, Position.Y);
-            }
-
-            if (Position.Y < 1)
-            {
-                Position = new Position(Position.X, Console.WindowHeight - 1);
-            }
-            else if (Position.Y >= Console.WindowHeight)
-            {
-                Position = new Position(Position.X, 1);
-            }
-        }
     }
 }

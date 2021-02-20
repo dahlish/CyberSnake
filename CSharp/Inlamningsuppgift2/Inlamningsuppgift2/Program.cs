@@ -7,25 +7,29 @@ namespace Inlamningsuppgift2
 {
     class Program
     {
+        static bool doNotRenderWalls = false;
+        static Statistics playerStats;
+
         /// <summary>
         /// Checks Console to see if a keyboard key has been pressed, if so returns it as uppercase, otherwise returns '\0'.
         /// </summary>
         static char ReadKeyIfExists() => Console.KeyAvailable ? Console.ReadKey(intercept: true).Key.ToString().ToUpper()[0] : '\0';
-        static bool doNotRenderWalls = false;
-        static Statistics playerStats;
 
+
+        /// <summary>
+        /// Starts the game. This will continue to run until a game has ended, which happens once the local variable running is set to false.
+        /// </summary>
+        /// <param name="difficulty">Represents the game difficulty setting.</param>
         static void Loop(Difficulty difficulty)
         {
-            // Initialisera spelet
             GameWorld world = new GameWorld(50, 20, difficulty, doNotRenderWalls);
 
             int frameRate = 5 * (int)difficulty;
             int frameCounter = 0;
 
             ConsoleRenderer renderer = new ConsoleRenderer(world);
-            Player player = new Player('8', Position.GetRandomPosition(), world);
+            Player player = new Player('8', 'O',Position.GetRandomPosition(), world);
             player.Direction = Direction.None;
-            world.AllObjects.Add(player);
 
             bool running = true;
             while (running)
@@ -73,7 +77,7 @@ namespace Inlamningsuppgift2
 
                 if (world.GameIsOver)
                 {
-                    playerStats = world.GetGameStats();
+                    playerStats = world.GameStatistics;
                 }
 
                 double frameTime = Math.Ceiling((1000.0 / frameRate) - (DateTime.Now - before).TotalMilliseconds);
@@ -86,8 +90,6 @@ namespace Inlamningsuppgift2
 
                 if (frameTime > 0)
                 {
-                    // Vänta rätt antal millisekunder innan loopens nästa varv
-                    Console.Title = $"CyberSnake 2077 v{GameInfo.Version}";
                     Thread.Sleep((int)frameTime);
                 }
 
@@ -96,6 +98,7 @@ namespace Inlamningsuppgift2
 
         static void Main(string[] args)
         {
+            Console.Title = $"CyberSnake 2077 - Main Menu";
             bool keepRunning = true;
             do
             {
@@ -142,18 +145,28 @@ namespace Inlamningsuppgift2
 
             } while (keepRunning);
         }
+
+        /// <summary>
+        /// Fetches the current highest score from the Statistics struct and writes it to the console.
+        /// </summary>
         static void PostHighScore()
         {
-            Console.WriteLine($"Your highest score is {Statistics.GetHighestScore()}.");
+            Console.WriteLine($"Your highest score is {Statistics.GetHighestScore()}.\n\n");
         }
+        /// <summary>
+        /// Fetches the game information from the GameInfo class and writes it to the console. Posts game name, author and version.
+        /// </summary>
         static void PostGameInfo()
         {
             Console.WriteLine($"{GameInfo.Name} by {GameInfo.Author}\nCurrent version: {GameInfo.Version}\nGame Controls: Move with WASD.\nColliding with walls or yourself ends up in game over.\n" +
                 $"Press Q at any time to end the game.\n\n");
         }
+        /// <summary>
+        /// Fetches the latest game stats and posts it to the console. This method is called after a game is finished.
+        /// </summary>
         static void PostGameStats()
         {
-            Console.WriteLine($"Game over!\nYour score landed at: {playerStats.Score}\nYour snake length was: {playerStats.SnakeLength}\nYou played on difficulty {playerStats.DifficultyToString()}\n" +
+            Console.WriteLine($"Game over!\nYour score landed at: {playerStats.Score}\nYour snake length was: {playerStats.SnakeLength}\nYou played on difficulty {playerStats.DifficultyToString(playerStats.DifficultyPlayed)}\n" +
                 $"The game lasted for: {playerStats.TimePlayed} seconds. Your highest score ever is: {playerStats.HighestScore}\n\n");
         }
     }

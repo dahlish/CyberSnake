@@ -4,59 +4,90 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
+    /// <summary>
+    /// This class describes the Player that you will control during the game.
+    /// </summary>
     public class Player : GameObject, IMovable, IRenderable
     {
-        private Direction direction;
         private char appearance;
-        private List<Tail> tail = new List<Tail>();
+        private char tailAppearance;
         private int tailCounter = 0;
+        private Direction direction;
         private Position previousPosition;
-        private Direction previousDirection;
+        private List<Tail> tail = new List<Tail>();
 
-        public Direction Direction { get => direction; set => direction = value; }
-        public char Appearance { get => appearance; }        
+        public char Appearance { get => appearance; }
+        public char TailAppearance { get => tailAppearance; }
+        public Direction Direction { get => direction; set => direction = value; }    
         public Position PreviousPosition { get => previousPosition; }
         public List<Tail> Tail { get => tail; set => tail = value; }
 
-        public Player(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
+        /// <summary>
+        /// Creates a  new player object with the set properties and places it in the game world.
+        /// </summary>
+        /// <param name="appearance">The appearance of the player.</param>
+        /// <param name="tailAppearance">The appearance of the players tail.</param>
+        /// <param name="position">The position this object will be placed at in the game world.</param>
+        /// <param name="gameWorld">The gameworld this object belongs to.</param>
+        public Player(char appearance, char tailAppearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
             this.appearance = appearance;
-
+            this.tailAppearance = tailAppearance;
+            gameWorld.AllObjects.Add(this);
             OnCollision += Player_OnCollision;
         }
 
-        private void Player_OnCollision(object sender, GameObjectOnCollisionEventArgs e)
+        /// <summary>
+        /// This is called when the OnCollision event in the GameObject class is invoked.
+        /// It checks what it collides with, and acts accordingly. Such as eating food if the colliding object is Food, or resulting in GameOver if colliding 
+        /// with the tail or a wall.
+        /// </summary>
+        /// <param name="sender">The object that invoked this event.</param>
+        /// <param name="args">The event arguments that contains properties such as the colliding object.</param>
+        private void Player_OnCollision(GameObject sender, GameObjectOnCollisionEventArgs args)
         {
-            if (e.collidedGameObject is Food)
+            if (args.collidedGameObject is Food)
             {
-                EatFood(e.collidedGameObject as Food);
+                EatFood(args.collidedGameObject as Food);
             }
-            else if (e.collidedGameObject is Tail)
+            else if (args.collidedGameObject is Tail)
             {
                 GameWorld.GameOver();
             }
-            else if (e.collidedGameObject is Wall)
+            else if (args.collidedGameObject is Wall)
             {
                 GameWorld.GameOver();
             }
         }
 
-        public void EatFood(Food f)
+        /// <summary>
+        /// Calls the Destroy method on the Food parameter object.
+        /// Also increases the tail and resets the time until starvation.
+        /// </summary>
+        /// <param name="food">The food object which is to be eaten.</param>
+        public void EatFood(Food food)
         {
-            f.Destroy(GameWorld, this);
+            food.Destroy(GameWorld, this);
             GameWorld.TimeLastFoodEaten = GameWorld.ElapsedTime;
             tailCounter++;
         }
 
+        /// <summary>
+        /// This is called on every frame. 
+        /// It calls for movement and tail generation.
+        /// </summary>
         public override void Update()
         {
             GenerateTail();
             Move();
-            CheckCollision();
-
+            CheckConsoleBorderCollision();
+            previousPosition = Position;
             base.Update();
         }
 
+        /// <summary>
+        /// Moves based on the Players current direction field. It places the player in a new position based on its last position and direction.
+        /// </summary>
         public void Move()
         {
             if (direction == Direction.Up)
@@ -77,37 +108,17 @@ namespace Inlamningsuppgift2
             }
         }
 
-        public void CheckCollision()
-        {
-            if (Position.X < 0)
-            {
-                Position = new Position(Console.WindowWidth - 1, Position.Y);
-            }
-            else if (Position.X >= Console.WindowWidth)
-            {
-                Position = new Position(0, Position.Y);
-            }
-
-            if (Position.Y < 1)
-            {
-                Position = new Position(Position.X, Console.WindowHeight - 1);
-            }
-            else if (Position.Y >= Console.WindowHeight)
-            {
-                Position = new Position(Position.X, 1);
-            }
-
-            previousPosition = Position;
-        }
-
+        /// <summary>
+        /// Generates the tail in the world. The tail will stop generating new tails if the tail list count is larger than the tailCounter.
+        /// </summary>
         public void GenerateTail()
         {
-            tail.Insert(0, new Tail('O', previousPosition, GameWorld));
+            tail.Insert(0, new Tail(tailAppearance, previousPosition, GameWorld));
             Tail tailToRemove = tail[tail.Count - 1];
 
             if (tail.Count < tailCounter)
             {
-                tail.Insert(0, new Tail('O', previousPosition, GameWorld));
+                tail.Insert(0, new Tail(tailAppearance, previousPosition, GameWorld));
             }
             else if (tail.Count > tailCounter)
             {

@@ -4,22 +4,37 @@ using System.Text;
 
 namespace Inlamningsuppgift2
 {
+    /// <summary>
+    /// The wall generator acts as a generator for group of walls. You can use this to create many walls around a specific position.
+    /// </summary>
     class WallGenerator : GameObject
     {
         private char wallAppearance;
-        private List<Wall> walls = new List<Wall>();
         private int amount;
+        private List<Wall> walls = new List<Wall>();
 
         public int Amount { get => amount; set => amount = value; }
         public List<Wall> Walls { get => walls; }
 
-
+        /// <summary>
+        /// Creates a new WallGenerator that acts as a group of walls.
+        /// </summary>
+        /// <param name="amount">The amount of walls in this wall group.</param>
+        /// <param name="wallAppearance">The appearance of the walls.</param>
+        /// <param name="gameWorld">The gameworld this object belongs to.</param>
+        /// <param name="position">The starting position of the wall group.
+        /// </param>
         public WallGenerator(int amount, char wallAppearance, GameWorld gameWorld, Position position) : base (gameWorld, position)
         {
             this.amount = amount;
             this.wallAppearance = wallAppearance;
         }
 
+        /// <summary>
+        /// Generates new groups of Walls. It will determine the direction of the wall placement and then place a first wall based on this game objects position.
+        /// Subsequent walls will be placed next to the previous wall in the random direction decided inside the method.
+        /// Should a new wall be outside of bounds of the console, it will change direction of the wall and attempt to place it again.
+        /// </summary>
         public void Generate()
         {
             Random rand = new Random();
@@ -41,6 +56,7 @@ namespace Inlamningsuppgift2
                         else
                         {
                             wallDirection = GetNewDirection();
+                            i--;
                         }
                     }
                     else if (wallDirection == Direction.Down)
@@ -53,6 +69,7 @@ namespace Inlamningsuppgift2
                         else
                         {
                             wallDirection = GetNewDirection();
+                            i--;
                         }
                     }
                     else if (wallDirection == Direction.Left)
@@ -65,6 +82,7 @@ namespace Inlamningsuppgift2
                         else
                         {
                             wallDirection = GetNewDirection();
+                            i--;
                         }
                     }
                     else if (wallDirection == Direction.Right)
@@ -77,6 +95,7 @@ namespace Inlamningsuppgift2
                         else
                         {
                             wallDirection = GetNewDirection();
+                            i--;
                         }
                     }
                 }
@@ -89,6 +108,10 @@ namespace Inlamningsuppgift2
             }
         }
 
+        /// <summary>
+        /// Randomizes a new direction for the walls to be built around.
+        /// </summary>
+        /// <returns>A new direction as a Direction value.</returns>
         private Direction GetNewDirection()
         {
             Random rand = new Random();
