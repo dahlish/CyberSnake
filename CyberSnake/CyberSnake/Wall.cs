@@ -36,7 +36,7 @@ namespace CyberSnake
             if (args.collidedGameObject is Player)
             {
                 Player player = args.collidedGameObject as Player;
-                player.Position = Position.GetRandomPosition();
+                player.Position = Position.GetRandomPositionAvailable(GameWorld);
             }
         }
     }

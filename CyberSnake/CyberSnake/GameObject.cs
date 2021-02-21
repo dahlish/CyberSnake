@@ -58,9 +58,9 @@ namespace CyberSnake
         /// <param name="destroyedByObject">The object that destroyed this object.</param>
         public virtual void Destroy(GameWorld world, GameObject destroyedByObject)
         {
-            world.AllObjects.Remove(this);
             GameObjectOnDestroyEventArgs args = new GameObjectOnDestroyEventArgs { destroyedObject = this, timeElapsed = world.ElapsedTime, destroyedByObject = destroyedByObject};
             OnDestroy?.Invoke(this, args);
+            world.AllObjects.Remove(this);
         }
 
         /// <summary>

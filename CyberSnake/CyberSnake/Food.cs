@@ -39,10 +39,11 @@ namespace CyberSnake
             this.foodType = foodType;
             this.maxTime = maxTime;
             gameWorld.AllObjects.Add(this);
+            GameWorld.FoodAmount += 1;
             createdTime = gameWorld.ElapsedTime;
             OnDestroy += Food_OnDestroy;
-            OnFoodExpired += Food_OnFoodExpired;
             OnCollision += Food_OnCollision;
+            OnFoodExpired += Food_OnFoodExpired;
         }
 
         /// <summary>
@@ -53,9 +54,9 @@ namespace CyberSnake
         /// <param name="args">Contains arguments such as the colliding gameobject.</param>
         private void Food_OnCollision(GameObject sender, GameObjectOnCollisionEventArgs args)
         {
-            if (args.collidedGameObject is Wall || args.collidedGameObject is Tail)
+            if (args.collidedGameObject is Wall || args.collidedGameObject is Tail || args.collidedGameObject is Food)
             {
-                Destroy(GameWorld, this);
+                Position = Position.GetRandomPositionAvailable(GameWorld);
             }
         }
 

@@ -86,6 +86,7 @@ namespace CyberSnake
         public void Update()
         {
             CallUpdateOnAllGameObjects();
+
             if (foodAmount < foodMax)
             {
                 CreateFood();
@@ -95,7 +96,7 @@ namespace CyberSnake
             {
                 for (int i = 0; i < amountOfWallGroups; i++)
                 {
-                    WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPosition());
+                    WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPositionAvailable(this));
                     walls.Generate();
                 }
                 wallsCreated = true;
@@ -122,18 +123,15 @@ namespace CyberSnake
             if (score >= spawnSpecialFoodAtScore && score != 0 && !specialFoodSpawnedAlready)
             {
                 specialFoodSpawnedAlready = true;
-                Food food = Food.Create('+', Position.GetRandomPosition(), this, FoodType.Special, 8 - (int)difficulty);
-                Food foodNormal = Food.Create('*', Position.GetRandomPosition(), this, FoodType.Normal);
+                Food food = Food.Create('+', Position.GetRandomPositionAvailable(this), this, FoodType.Special, 8 - (int)difficulty);
+                Food foodNormal = Food.Create('*', Position.GetRandomPositionAvailable(this), this, FoodType.Normal);
                 spawnSpecialFoodAtScore = score + rand.Next(5, 20);
-                foodAmount++;
             }
             else
             {
-                Food food = Food.Create('*', Position.GetRandomPosition(), this, FoodType.Normal, 12 - (int)difficulty);
+                Food food = Food.Create('*', Position.GetRandomPositionAvailable(this), this, FoodType.Normal, 12 - (int)difficulty);
                 specialFoodSpawnedAlready = false;
             }
-
-            foodAmount++;
         }
 
         /// <summary>

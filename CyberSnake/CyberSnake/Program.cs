@@ -28,7 +28,7 @@ namespace CyberSnake
             int frameCounter = 0;
 
             ConsoleRenderer renderer = new ConsoleRenderer(world);
-            Player player = new Player('8', 'O',Position.GetRandomPosition(), world);
+            Player player = new Player('8', 'O', Position.GetRandomPositionAvailable(world), world);
             player.Direction = Direction.None;
 
             bool running = true;

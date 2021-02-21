@@ -85,5 +85,41 @@ namespace CyberSnake
 
             return new Position(rand.Next(0, Console.WindowWidth), rand.Next(1, Console.WindowHeight));
         }
+        /// <summary>
+        /// Creates and returns a random position which does not already contain a GameObject.
+        /// </summary>
+        /// <param name="world">The world to perform the check in.</param>
+        /// <returns>A new position that does not contain a gameobject.</returns>
+        public static Position GetRandomPositionAvailable(GameWorld world)
+        {
+            Random rand = new Random();
+
+            Position position = new Position(rand.Next(0, Console.WindowWidth), rand.Next(1, Console.WindowHeight));
+
+            while (HasGameObject(position, world))
+            {
+                position = new Position(rand.Next(0, Console.WindowWidth), rand.Next(1, Console.WindowHeight));
+            }
+
+            return position;
+        }
+
+        /// <summary>
+        /// Checks if a position in a game world already contains an object.
+        /// </summary>
+        /// <param name="position">The position to be checked.</param>
+        /// <param name="world">The game world to perform the check in.</param>
+        /// <returns>True if there is a gameObject on the position, else returns false.</returns>
+        public static bool HasGameObject(Position position, GameWorld world)
+        {
+            foreach(var gameObject in world.AllObjects)
+            {
+                if (gameObject.Position == position)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

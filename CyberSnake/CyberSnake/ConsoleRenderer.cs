@@ -64,6 +64,8 @@ namespace CyberSnake
             //och därmed blinkar det inte?
 
             Console.SetCursorPosition(0, 0);
+            RenderUserInterface();
+            ResetConsoleColors();
 
             foreach (var item in world.AllObjects)
             {
