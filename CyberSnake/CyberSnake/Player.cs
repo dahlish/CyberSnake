@@ -11,7 +11,7 @@ namespace CyberSnake
     {
         private char appearance;
         private char tailAppearance;
-        public int tailCounter = 0;
+        private int tailCounter = 0;
         private Direction direction;
         private Position previousPosition;
         private List<Tail> tail = new List<Tail>();

@@ -22,6 +22,7 @@ namespace CyberSnake
         /// <param name="difficulty">Represents the game difficulty setting.</param>
         static void Loop(Difficulty difficulty)
         {
+            Console.Title = "CyberSnake 2077 - Game Ongoing";
             GameWorld world = new GameWorld(50, 20, difficulty, doNotRenderWalls);
 
             int frameRate = 5 * (int)difficulty;
@@ -98,10 +99,10 @@ namespace CyberSnake
 
         static void Main(string[] args)
         {
-            Console.Title = $"CyberSnake 2077 - Main Menu";
             bool keepRunning = true;
             do
             {
+                Console.Title = $"CyberSnake 2077 - Main Menu";
                 Console.WriteLine($"Welcome to CyberSnake 2077. \n1. New Game\n2. Highest Score\n3. Help\n4. Exit");
                 string input = Console.ReadLine();
 
