@@ -10,6 +10,7 @@ namespace CyberSnake
     class Wall : GameObject, IRenderable
     {
         private char appearance;
+
         public char Appearance { get => appearance; }
 
 
@@ -22,6 +23,7 @@ namespace CyberSnake
         public Wall(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
             this.appearance = appearance;
+            IsStatic = true;
             OnCollision += Wall_OnCollision;
         }
 

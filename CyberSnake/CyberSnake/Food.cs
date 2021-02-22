@@ -25,6 +25,7 @@ namespace CyberSnake
         public FoodType FoodType { get => foodType; }
 
 
+
         /// <summary>
         /// Creates a new Food object and adds it to the AllObjects list in the gameWorld object.
         /// </summary>

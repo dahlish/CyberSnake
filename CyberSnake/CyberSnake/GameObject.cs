@@ -14,9 +14,13 @@ namespace CyberSnake
         public event GameObjectOnCollisionEventHandler OnCollision;
         public event GameObjectOnDestroyEventHandler OnDestroy;
 
+        private bool isStatic = false;
+        private bool hasRendered = false;
         private GameWorld gameWorld;
         private Position position;
 
+        public bool IsStatic { get => isStatic; set => isStatic = value; }
+        public bool HasRendered { get => hasRendered; set => hasRendered = value; }
         public GameWorld GameWorld { get => gameWorld; }
         public Position Position { get => position; set => position = value; }
 

@@ -49,8 +49,14 @@ namespace CyberSnake
                 if (item is IRenderable)
                 {
                     var itemAppearance = item as IRenderable;
-                    Console.SetCursorPosition(item.Position.X, item.Position.Y);
-                    Console.Write(itemAppearance.Appearance);
+
+                    if (!item.IsStatic || (item.IsStatic && !item.HasRendered))
+                    {
+                        Console.SetCursorPosition(item.Position.X, item.Position.Y);
+                        Console.Write(itemAppearance.Appearance);
+                        item.HasRendered = true;
+                    }
+                    
                 }
             }
         }
@@ -72,8 +78,11 @@ namespace CyberSnake
                 if (item is IRenderable)
                 {
                     var itemAppearance = item as IRenderable;
-                    Console.SetCursorPosition(item.Position.X, item.Position.Y);
-                    Console.Write(' ');
+                    if (!item.IsStatic)
+                    {
+                        Console.SetCursorPosition(item.Position.X, item.Position.Y);
+                        Console.Write(' ');
+                    }
                 }
             }
         }
