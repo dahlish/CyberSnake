@@ -7,7 +7,7 @@ namespace CyberSnake
     /// <summary>
     /// The wall generator acts as a generator for group of walls. You can use this to create many walls around a specific position.
     /// </summary>
-    class WallGenerator : GameObject
+    public class WallGenerator : GameObject
     {
         private char wallAppearance;
         private int amount;
@@ -28,6 +28,11 @@ namespace CyberSnake
         {
             this.amount = amount;
             this.wallAppearance = wallAppearance;
+
+            if (ConsoleRenderer.CheckOutOfBounds(position))
+            {
+                Position = Position.GetRandomPositionAvailable(gameWorld);
+            }
         }
 
         /// <summary>

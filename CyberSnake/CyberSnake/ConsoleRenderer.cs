@@ -7,10 +7,18 @@ namespace CyberSnake
     /// <summary>
     /// This class controls everything needed to render the game world.
     /// </summary>
-    class ConsoleRenderer
+    public class ConsoleRenderer
     {
         private GameWorld world;
+        private static int consoleWidth = 10;
+        private static int consoleHeight = 10;
+        private static int consoleMaximumWidth = 50;
+        private static int consoleMaximumHeight = 50;
 
+        public static int ConsoleWidth { get => consoleWidth; set => consoleWidth = value; }
+        public static int ConsoleHeight { get => consoleHeight; set => ConsoleHeight = value; }
+        public static int ConsoleMaximumWidth { get => consoleMaximumWidth; set => consoleMaximumWidth = value; }
+        public static int ConsoleMaximumHeight { get => consoleMaximumHeight; set => consoleMaximumHeight = value; }
         /// <summary>
         /// Generates a new ConsoleRenderer object that can be used to render the gameworld. If the gameWorld size is larger than the maximum allowed size
         /// for the Console, it will be set to the maximum size.
@@ -25,11 +33,19 @@ namespace CyberSnake
             {
                 Console.SetBufferSize(gameWorld.SizeX, gameWorld.SizeY);
                 Console.SetWindowSize(gameWorld.SizeX, gameWorld.SizeY);
+                consoleWidth = Console.WindowWidth;
+                consoleHeight = Console.WindowHeight;
+                consoleMaximumWidth = Console.LargestWindowWidth;
+                consoleMaximumHeight = Console.LargestWindowHeight;
             }
             catch(ArgumentOutOfRangeException)
             {
                 Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
                 Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+                ConsoleWidth = Console.WindowWidth;
+                ConsoleHeight = Console.WindowHeight;
+                ConsoleMaximumWidth = Console.LargestWindowWidth;
+                ConsoleMaximumHeight = Console.LargestWindowHeight;
             }
         }
         
@@ -93,7 +109,7 @@ namespace CyberSnake
         /// </summary>
         private void RenderUserInterface()
         {
-            int windowWidth = Console.WindowWidth;
+            int windowWidth = ConsoleWidth;
             Console.BackgroundColor = ConsoleColor.Cyan;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("{0, -" + windowWidth + "}", $"Score: {world.Score} | Starvation Timer ({world.StarvationTime}): " + (world.ElapsedTime - world.TimeLastFoodEaten));
@@ -115,11 +131,11 @@ namespace CyberSnake
         /// <returns>Returns true if it is out of bounds, else it returns false.</returns>
         public static bool CheckOutOfBounds(Position position)
         {
-            if (position.X <= 0)
+            if (position.X < 0)
             {
                 return true;
             }
-            else if (position.X >= Console.WindowWidth)
+            else if (position.X >= ConsoleWidth)
             {
                 return true;
             }
@@ -128,7 +144,7 @@ namespace CyberSnake
             {
                 return true;
             }
-            else if (position.Y >= Console.WindowHeight)
+            else if (position.Y >= ConsoleHeight)
             {
                 return true;
             }

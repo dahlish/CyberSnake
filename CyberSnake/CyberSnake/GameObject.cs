@@ -76,18 +76,18 @@ namespace CyberSnake
         {
             if (Position.X < 0)
             {
-                Position = new Position(Console.WindowWidth - 1, Position.Y);
+                Position = new Position(ConsoleRenderer.ConsoleWidth - 1, Position.Y);
             }
-            else if (Position.X >= Console.WindowWidth)
+            else if (Position.X >= ConsoleRenderer.ConsoleWidth)
             {
                 Position = new Position(0, Position.Y);
             }
 
             if (Position.Y < 1)
             {
-                Position = new Position(Position.X, Console.WindowHeight - 1);
+                Position = new Position(Position.X, ConsoleRenderer.ConsoleHeight - 1);
             }
-            else if (Position.Y >= Console.WindowHeight)
+            else if (Position.Y >= ConsoleRenderer.ConsoleHeight)
             {
                 Position = new Position(Position.X, 1);
             }

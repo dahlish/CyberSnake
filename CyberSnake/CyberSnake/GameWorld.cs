@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace CyberSnake
 {
@@ -21,7 +22,7 @@ namespace CyberSnake
         private int foodMax = 1;
         private int score = 0;
         private bool specialFoodSpawnedAlready = false;
-        private bool wallsCreated = false;
+        private bool createWalls = true;
         private bool gameIsOver = false;
         private Difficulty difficulty;
         private Statistics gameStatistics;
@@ -47,9 +48,9 @@ namespace CyberSnake
         /// <param name="sizeY">The size of the game screen.</param>
         /// <param name="difficulty">The difficulty setting of the game.</param>
         /// <param name="wallsCreated">A cheat. If you want no walls to be generated, you set this to false.</param>
-        public GameWorld(int sizeX, int sizeY, Difficulty difficulty, bool wallsCreated = true)
+        public GameWorld(int sizeX, int sizeY, Difficulty difficulty, bool createWalls = true)
         {
-            this.wallsCreated = wallsCreated;
+            this.createWalls = createWalls;
             this.sizeX = sizeX;
             this.sizeY = sizeY;
             this.difficulty = difficulty;
@@ -80,6 +81,21 @@ namespace CyberSnake
         }
 
         /// <summary>
+        /// This method is called before the first update.
+        /// </summary>
+        public void Start()
+        {
+            if (createWalls)
+            {
+                for (int i = 0; i < amountOfWallGroups; i++)
+                {
+                    WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPositionAvailable(this));
+                    walls.Generate();
+                }
+            }
+        }
+
+        /// <summary>
         /// Update is called whenever a new frame is generated in the Program.Loop() method.
         /// This method also generates all the walls that are to be placed in the world.
         /// </summary>
@@ -90,16 +106,6 @@ namespace CyberSnake
             if (foodAmount < foodMax)
             {
                 CreateFood();
-            }
-
-            if (!wallsCreated)
-            {
-                for (int i = 0; i < amountOfWallGroups; i++)
-                {
-                    WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPositionAvailable(this));
-                    walls.Generate();
-                }
-                wallsCreated = true;
             }
         }
 
