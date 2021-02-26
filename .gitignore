@@ -360,3 +360,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+CyberSnake/.vs/CyberSnake/v16/.suo
+CyberSnake/.vs/CyberSnake/v16/TestStore/0/002.testlog
+*.testlog
