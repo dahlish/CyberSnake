@@ -96,7 +96,6 @@ namespace CyberSnake.Tests
         [TestMethod()]
         public void GetRandomPositionAvailableTest()
         {
-            //TODO: Implement try & catch for the GetRandomPosition, we must catch NoAvailablePositionFoundExceptions
             GameWorld world1 = new GameWorld(10, 10, Difficulty.Easy);
 
             ConsoleRenderer.ConsoleWidth = 2;

@@ -89,8 +89,15 @@ namespace CyberSnake
             {
                 for (int i = 0; i < amountOfWallGroups; i++)
                 {
-                    WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPositionAvailable(this));
-                    walls.Generate();
+                    try
+                    {
+                        WallGenerator walls = new WallGenerator(wallGroupMaxAmount, 'X', this, Position.GetRandomPositionAvailable(this));
+                        walls.Generate();
+                    }
+                    catch (NoAvailablePositionFoundException)
+                    {
+                        break; //Should this happen we will stop generating more wall groups.
+                    }
                 }
             }
         }
@@ -129,13 +136,27 @@ namespace CyberSnake
             if (score >= spawnSpecialFoodAtScore && score != 0 && !specialFoodSpawnedAlready)
             {
                 specialFoodSpawnedAlready = true;
-                Food food = Food.Create('+', Position.GetRandomPositionAvailable(this), this, FoodType.Special, 8 - (int)difficulty);
-                Food foodNormal = Food.Create('*', Position.GetRandomPositionAvailable(this), this, FoodType.Normal);
-                spawnSpecialFoodAtScore = score + rand.Next(5, 20);
+                try
+                {
+                    Food food = Food.Create('+', Position.GetRandomPositionAvailable(this), this, FoodType.Special, 8 - (int)difficulty);
+                    Food foodNormal = Food.Create('*', Position.GetRandomPositionAvailable(this), this, FoodType.Normal);
+                    spawnSpecialFoodAtScore = score + rand.Next(5, 20);
+                }
+                catch(NoAvailablePositionFoundException)
+                {
+                    foodMax = 0; //Stop generating food as we have no spot to put it on anymore.
+                }
             }
             else
             {
-                Food food = Food.Create('*', Position.GetRandomPositionAvailable(this), this, FoodType.Normal, 12 - (int)difficulty);
+                try
+                {
+                    Food food = Food.Create('*', Position.GetRandomPositionAvailable(this), this, FoodType.Normal, 12 - (int)difficulty);
+                }
+                catch(NoAvailablePositionFoundException)
+                {
+                    foodMax = 0; //Stop generating food as we have no spot to put it on anymore.
+                }
                 specialFoodSpawnedAlready = false;
             }
         }

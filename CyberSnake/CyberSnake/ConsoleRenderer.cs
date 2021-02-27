@@ -10,13 +10,17 @@ namespace CyberSnake
     public class ConsoleRenderer
     {
         private GameWorld world;
+
+        //Varför jag lade till dessa statiska värden i ConsoleRenderer var för att det var svårt att testa mina metoder som berodde på 
+        //Console.WindowHeight/Console.WindowWidth då det i testerna inte finns någon konsol. Så dessa defaultvärden overrideas när ConsoleRenderer skapas, men defaultar
+        //till nedan värden så det också kan testas :) Finns det bättre sätt eller är detta det rimligaste sättet?
         private static int consoleWidth = 10;
         private static int consoleHeight = 10;
         private static int consoleMaximumWidth = 50;
         private static int consoleMaximumHeight = 50;
 
         public static int ConsoleWidth { get => consoleWidth; set => consoleWidth = value; }
-        public static int ConsoleHeight { get => consoleHeight; set => ConsoleHeight = value; }
+        public static int ConsoleHeight { get => consoleHeight; set => consoleHeight = value; }
         public static int ConsoleMaximumWidth { get => consoleMaximumWidth; set => consoleMaximumWidth = value; }
         public static int ConsoleMaximumHeight { get => consoleMaximumHeight; set => consoleMaximumHeight = value; }
         /// <summary>
@@ -129,7 +133,7 @@ namespace CyberSnake
         /// </summary>
         /// <param name="position"></param>
         /// <returns>Returns true if it is out of bounds, else it returns false.</returns>
-        public static bool CheckOutOfBounds(Position position)
+        public static bool IsOutOfBounds(Position position)
         {
             if (position.X < 0)
             {
@@ -140,7 +144,7 @@ namespace CyberSnake
                 return true;
             }
 
-            if (position.Y < 1)
+            if (position.Y < 1) //1 because the first Y row is dedicated to user interface.
             {
                 return true;
             }

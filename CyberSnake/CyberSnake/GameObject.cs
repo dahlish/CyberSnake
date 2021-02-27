@@ -18,7 +18,12 @@ namespace CyberSnake
         private bool hasRendered = false;
         private GameWorld gameWorld;
         private Position position;
+        
 
+        /// <summary>
+        /// GameObjects implementing IRenderable will only be rendered once (the first frame) when this property is set to true.
+        /// Setting this to true is recommended for objects that never change position during their entire existence.
+        /// </summary>
         public bool IsStatic { get => isStatic; set => isStatic = value; }
         public bool HasRendered { get => hasRendered; set => hasRendered = value; }
         public GameWorld GameWorld { get => gameWorld; }

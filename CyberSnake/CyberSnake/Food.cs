@@ -57,7 +57,14 @@ namespace CyberSnake
         {
             if (args.collidedGameObject is Wall || args.collidedGameObject is Tail || args.collidedGameObject is Food)
             {
-                Position = Position.GetRandomPositionAvailable(GameWorld);
+                try
+                {
+                    Position = Position.GetRandomPositionAvailable(GameWorld);
+                }
+                catch (NoAvailablePositionFoundException)
+                {
+                    Destroy(GameWorld, this);
+                }
             }
         }
 

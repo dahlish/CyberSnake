@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj": {}
+    "C:\\Zquall Repos\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj": {}
   },
   "projects": {
-    "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj": {
+    "C:\\Zquall Repos\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
+        "projectUniqueName": "C:\\Zquall Repos\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
         "projectName": "CyberSnake",
-        "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
-        "packagesPath": "C:\\Users\\zeke1\\.nuget\\packages\\",
-        "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\obj\\",
+        "projectPath": "C:\\Zquall Repos\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
+        "packagesPath": "C:\\Users\\ChristopherDahlborg\\.nuget\\packages\\",
+        "outputPath": "C:\\Zquall Repos\\CyberSnake\\CyberSnake\\CyberSnake\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\zeke1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ChristopherDahlborg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -43,6 +43,26 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.9.1, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
