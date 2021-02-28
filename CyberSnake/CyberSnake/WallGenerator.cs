@@ -121,9 +121,9 @@ namespace CyberSnake
         }
 
         /// <summary>
-        /// Randomizes a new direction for the walls to be built around.
+        /// Randomizes a direction for the walls to be built around.
         /// </summary>
-        /// <returns>A new direction as a Direction value.</returns>
+        /// <returns>A random direction as a Direction value.</returns>
         private Direction GetNewDirection()
         {
             Random rand = new Random();
