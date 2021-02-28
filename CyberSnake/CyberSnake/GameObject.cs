@@ -14,9 +14,18 @@ namespace CyberSnake
         public event GameObjectOnCollisionEventHandler OnCollision;
         public event GameObjectOnDestroyEventHandler OnDestroy;
 
+        private bool isStatic = false;
+        private bool hasRendered = false;
         private GameWorld gameWorld;
         private Position position;
+        
 
+        /// <summary>
+        /// GameObjects implementing IRenderable will only be rendered once (the first frame) when this property is set to true.
+        /// Setting this to true is recommended for objects that never change position during their entire existence.
+        /// </summary>
+        public bool IsStatic { get => isStatic; set => isStatic = value; }
+        public bool HasRendered { get => hasRendered; set => hasRendered = value; }
         public GameWorld GameWorld { get => gameWorld; }
         public Position Position { get => position; set => position = value; }
 
@@ -58,9 +67,9 @@ namespace CyberSnake
         /// <param name="destroyedByObject">The object that destroyed this object.</param>
         public virtual void Destroy(GameWorld world, GameObject destroyedByObject)
         {
-            world.AllObjects.Remove(this);
             GameObjectOnDestroyEventArgs args = new GameObjectOnDestroyEventArgs { destroyedObject = this, timeElapsed = world.ElapsedTime, destroyedByObject = destroyedByObject};
             OnDestroy?.Invoke(this, args);
+            world.AllObjects.Remove(this);
         }
 
         /// <summary>
@@ -72,18 +81,18 @@ namespace CyberSnake
         {
             if (Position.X < 0)
             {
-                Position = new Position(Console.WindowWidth - 1, Position.Y);
+                Position = new Position(ConsoleRenderer.ConsoleWidth - 1, Position.Y);
             }
-            else if (Position.X >= Console.WindowWidth)
+            else if (Position.X >= ConsoleRenderer.ConsoleWidth)
             {
                 Position = new Position(0, Position.Y);
             }
 
             if (Position.Y < 1)
             {
-                Position = new Position(Position.X, Console.WindowHeight - 1);
+                Position = new Position(Position.X, ConsoleRenderer.ConsoleHeight - 1);
             }
-            else if (Position.Y >= Console.WindowHeight)
+            else if (Position.Y >= ConsoleRenderer.ConsoleHeight)
             {
                 Position = new Position(Position.X, 1);
             }

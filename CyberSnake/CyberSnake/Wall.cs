@@ -7,9 +7,10 @@ namespace CyberSnake
     /// <summary>
     /// Wall objects are obstacles in the game that can not be traversed.
     /// </summary>
-    class Wall : GameObject, IRenderable
+    public class Wall : GameObject, IRenderable
     {
         private char appearance;
+
         public char Appearance { get => appearance; }
 
 
@@ -22,22 +23,7 @@ namespace CyberSnake
         public Wall(char appearance, Position position, GameWorld gameWorld) : base(gameWorld, position)
         {
             this.appearance = appearance;
-            OnCollision += Wall_OnCollision;
-        }
-
-        /// <summary>
-        /// This event is invoked whenever a Wall object collides with another object.
-        /// This method is  primarily here to prevent the Player from spawning on a Wall.
-        /// </summary>
-        /// <param name="sender">The object that invoked this event.</param>
-        /// <param name="args">Contains arguments such as the colliding gameobject.</param>
-        private void Wall_OnCollision(GameObject sender, GameObjectOnCollisionEventArgs args)
-        {
-            if (args.collidedGameObject is Player)
-            {
-                Player player = args.collidedGameObject as Player;
-                player.Position = Position.GetRandomPosition();
-            }
+            IsStatic = true;
         }
     }
 }

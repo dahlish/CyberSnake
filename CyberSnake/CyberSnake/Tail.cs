@@ -10,6 +10,7 @@ namespace CyberSnake
     public class Tail : GameObject, IRenderable
     {
         private char appearance;
+
         public char Appearance { get => appearance; }
 
         /// <summary>

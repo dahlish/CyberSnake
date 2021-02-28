@@ -92,19 +92,19 @@ namespace CyberSnake
         {
             if (direction == Direction.Up)
             {
-                Position = new Position(Position.X, Position.Y - 1);
+                Position -= new Position(0, 1);
             }
             else if (direction == Direction.Down)
             {
-                Position = new Position(Position.X, Position.Y + 1);
+                Position += new Position(0, 1);
             }
             else if (direction == Direction.Left)
             {
-                Position = new Position(Position.X - 1, Position.Y);
+                Position -= new Position(1, 0);
             }
             else if (direction == Direction.Right)
             {
-                Position = new Position(Position.X + 1, Position.Y);
+                Position += new Position(1, 0);
             }
         }
 

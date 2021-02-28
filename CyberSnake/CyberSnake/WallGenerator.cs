@@ -7,7 +7,7 @@ namespace CyberSnake
     /// <summary>
     /// The wall generator acts as a generator for group of walls. You can use this to create many walls around a specific position.
     /// </summary>
-    class WallGenerator : GameObject
+    public class WallGenerator : GameObject
     {
         private char wallAppearance;
         private int amount;
@@ -28,6 +28,18 @@ namespace CyberSnake
         {
             this.amount = amount;
             this.wallAppearance = wallAppearance;
+
+            if (ConsoleRenderer.IsOutOfBounds(position))
+            {
+                try
+                {
+                    Position = Position.GetRandomPositionAvailable(gameWorld);
+                }
+                catch (NoAvailablePositionFoundException)
+                {
+                    Destroy(GameWorld, this);
+                }
+            }
         }
 
         /// <summary>
@@ -49,9 +61,9 @@ namespace CyberSnake
                     if (wallDirection == Direction.Up)
                     {
                         newPos = new Position(walls[walls.Count - 1].Position.X, walls[walls.Count - 1].Position.Y - 1);
-                        if (!ConsoleRenderer.CheckOutOfBounds(newPos))
+                        if (!ConsoleRenderer.IsOutOfBounds(newPos) && !Position.HasGameObject(newPos, GameWorld))
                         {
-                            walls.Add(new Wall(wallAppearance, new Position(walls[walls.Count - 1].Position.X, walls[walls.Count - 1].Position.Y - 1), GameWorld));
+                            walls.Add(new Wall(wallAppearance, walls[walls.Count - 1].Position -= new Position(0, 1), GameWorld));
                         }
                         else
                         {
@@ -62,9 +74,9 @@ namespace CyberSnake
                     else if (wallDirection == Direction.Down)
                     {
                         newPos = new Position(walls[walls.Count - 1].Position.X, walls[walls.Count - 1].Position.Y + 1);
-                        if (!ConsoleRenderer.CheckOutOfBounds(newPos))
+                        if (!ConsoleRenderer.IsOutOfBounds(newPos) && !Position.HasGameObject(newPos, GameWorld))
                         {
-                            walls.Add(new Wall(wallAppearance, new Position(walls[walls.Count - 1].Position.X, walls[walls.Count - 1].Position.Y + 1), GameWorld));
+                            walls.Add(new Wall(wallAppearance, walls[walls.Count - 1].Position += new Position(0, 1), GameWorld));
                         }
                         else
                         {
@@ -75,9 +87,9 @@ namespace CyberSnake
                     else if (wallDirection == Direction.Left)
                     {
                         newPos = new Position(walls[walls.Count - 1].Position.X - 1, walls[walls.Count - 1].Position.Y);
-                        if (!ConsoleRenderer.CheckOutOfBounds(newPos))
+                        if (!ConsoleRenderer.IsOutOfBounds(newPos) && !Position.HasGameObject(newPos, GameWorld))
                         {
-                            walls.Add(new Wall(wallAppearance, new Position(walls[walls.Count - 1].Position.X - 1, walls[walls.Count - 1].Position.Y), GameWorld));
+                            walls.Add(new Wall(wallAppearance, walls[walls.Count - 1].Position -= new Position(1, 0), GameWorld));
                         }
                         else
                         {
@@ -88,9 +100,9 @@ namespace CyberSnake
                     else if (wallDirection == Direction.Right)
                     {
                         newPos = new Position(walls[walls.Count - 1].Position.X + 1, walls[walls.Count - 1].Position.Y);
-                        if (!ConsoleRenderer.CheckOutOfBounds(newPos))
+                        if (!ConsoleRenderer.IsOutOfBounds(newPos) && !Position.HasGameObject(newPos, GameWorld))
                         {
-                            walls.Add(new Wall(wallAppearance, new Position(walls[walls.Count - 1].Position.X + 1, walls[walls.Count - 1].Position.Y), GameWorld));
+                            walls.Add(new Wall(wallAppearance, walls[walls.Count - 1].Position += new Position(1, 0), GameWorld));
                         }
                         else
                         {
@@ -109,9 +121,9 @@ namespace CyberSnake
         }
 
         /// <summary>
-        /// Randomizes a new direction for the walls to be built around.
+        /// Randomizes a direction for the walls to be built around.
         /// </summary>
-        /// <returns>A new direction as a Direction value.</returns>
+        /// <returns>A random direction as a Direction value.</returns>
         private Direction GetNewDirection()
         {
             Random rand = new Random();

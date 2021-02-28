@@ -7,7 +7,6 @@ namespace CyberSnake
 {
     class Program
     {
-        static bool doNotRenderWalls = false;
         static Statistics playerStats;
 
         /// <summary>
@@ -20,15 +19,26 @@ namespace CyberSnake
         /// Starts the game. This will continue to run until a game has ended, which happens once the local variable running is set to false.
         /// </summary>
         /// <param name="difficulty">Represents the game difficulty setting.</param>
-        static void Loop(Difficulty difficulty)
+        static void Loop(Difficulty difficulty, string cheat = "")
         {
-            GameWorld world = new GameWorld(50, 20, difficulty, doNotRenderWalls);
+            bool createWalls = true;
+
+            if(cheat == "nowalls")
+            {
+                createWalls = false;
+            }
+           
+            Console.Title = "CyberSnake 2077 - Game Ongoing";
+            GameWorld world = new GameWorld(50, 20, difficulty, createWalls);
 
             int frameRate = 5 * (int)difficulty;
             int frameCounter = 0;
 
             ConsoleRenderer renderer = new ConsoleRenderer(world);
-            Player player = new Player('8', 'O',Position.GetRandomPosition(), world);
+
+            world.Start();
+
+            Player player = new Player('8', 'O', Position.GetRandomPositionAvailable(world), world);
             player.Direction = Direction.None;
 
             bool running = true;
@@ -98,10 +108,10 @@ namespace CyberSnake
 
         static void Main(string[] args)
         {
-            Console.Title = $"CyberSnake 2077 - Main Menu";
             bool keepRunning = true;
             do
             {
+                Console.Title = $"CyberSnake 2077 - Main Menu";
                 Console.WriteLine($"Welcome to CyberSnake 2077. \n1. New Game\n2. Highest Score\n3. Help\n4. Exit");
                 string input = Console.ReadLine();
 
@@ -125,9 +135,7 @@ namespace CyberSnake
                         else
                         {
                             Console.Clear();
-                            doNotRenderWalls = true;
-                            Loop(Difficulty.VeryHard);
-                            doNotRenderWalls = false;
+                            Loop(Difficulty.VeryHard, difficultyInput);
                         }
                         Console.Clear();
                         PostGameStats();
