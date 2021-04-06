@@ -6012,7 +6012,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\zeke1\\.nuget\\packages\\": {},
+    "C:\\Users\\christopher.dahlborg\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
@@ -6021,14 +6021,14 @@
       "projectUniqueName": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
       "projectName": "CyberSnake",
       "projectPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\CyberSnake.csproj",
-      "packagesPath": "C:\\Users\\zeke1\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\christopher.dahlborg\\.nuget\\packages\\",
       "outputPath": "F:\\Repos\\Github_ZquallTechnologies\\CyberSnake\\CyberSnake\\CyberSnake\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\zeke1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\christopher.dahlborg\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],

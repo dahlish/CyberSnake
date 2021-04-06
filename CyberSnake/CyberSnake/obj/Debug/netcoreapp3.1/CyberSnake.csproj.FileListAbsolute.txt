@@ -214,3 +214,4 @@ F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\ne
 F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.csproj.CopyComplete
+F:\Repos\Github_ZquallTechnologies\CyberSnake\CyberSnake\CyberSnake\obj\Debug\netcoreapp3.1\CyberSnake.csprojAssemblyReference.cache
